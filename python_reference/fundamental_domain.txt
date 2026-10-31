@@ -1,0 +1,22 @@
+Finalized Fundamental Domain Plan
+(Step 0) Compute Canonical Face Embeddings: For each triangular face, construct its ideal hyperbolic triangle from the length property of its edges. Compute the isometry that moves the triangle's barycenter to the origin (0,0,1).
+
+1.  Compute Edge Isometries: For each interior half-edge he, calculate the isometry that maps the canonical embedding of he.twin.face onto the canonical embedding of he.face by aligning their shared edge.
+
+2. Build Weighted Dual Graph: Create the dual graph where nodes are faces, and edges are weighted by the hyperbolic distance between the barycenters of adjacent faces.
+
+3. Choose Start Face: Select a canonical starting face to act as the root of our fundamental domain.
+
+4. Compute Shortest Path Spanning Tree: Run Dijkstra's algorithm to find the unique shortest path from every face back to the start face, forming a spanning tree.
+
+5. Classify Holonomy of All Seams via Propagation: Initialize all edges in the spanning tree to the trivial holonomy class. Then, iteratively "fill in" the holonomy class of any edge in a triangle where the other two edges have known classes until all edges are classified.
+
+6. Place Faces via Error Minimization:
+
+Initialize the root face at its canonical position.
+
+Iterate through the remaining faces in order of their distance from the root (closest first).
+
+For each face, calculate its optimal position in the global frame by minimizing the error between its canonical embedding and the embeddings of all its already-placed neighbors that are connected by a trivial holonomy class.
+
+8. Optimize Holonomy Transforms: For each distinct, non-trivial holonomy class, use an optimization routine to find the single 3x3 Lorentz transformation that best aligns all the geometric seam edges belonging to that class.
